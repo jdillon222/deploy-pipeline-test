@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - aws cloudformation package --template-file upsource-shared-snapshot-function.yaml --s3-bucket plume-dev-codepipeline.python_test
+                                   --output-template-file outputSamTemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - upsource-shared-snapshot-function.yaml
+    - outputSamTemplate.yaml

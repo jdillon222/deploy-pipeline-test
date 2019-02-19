@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: >-
+  Lambda function providing reoccurring EBS volume snapshots, as well as
+  snapshot lifecycle management
+Resources:
+  upsourcesharedsnapshotfunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: snap_handler.lambda_handler
+      Runtime: python2.7
+      CodeUri: ./site-packages
+      Description: >-
+        Lambda function providing reoccurring EBS volume snapshots, as well as
+        snapshot lifecycle management
+      MemorySize: 448
+      Timeout: 300
+      Role: 'arn:aws:iam::470465538235:role/plume-shared-snapshot-lambda-role'
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1440 minutes)
+      Environment:
+        Variables:
+          Instance1: upsource-development-01.shared.us-west-2.aws.plume.tech
