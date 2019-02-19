@@ -3,8 +3,8 @@ phases:
   install:
     commands:
       - npm install time
-      - aws cloudformation package --template-file node_folder/samTemplate.yaml --s3-bucket plume-dev-codepipeline/node_test
-                                   --output-template-file outputSamTemplate.yaml
+      - aws cloudformation package --template-file node_folder/samTemplate.yaml --s3-bucket plume-dev-codepipeline
+                                   --output-template-file node_test/outputSamTemplate.yaml
 artifacts:
   type: zip
   files:
